@@ -1,0 +1,159 @@
+<?php
+session_start();
+
+$role = isset($_SESSION['login_role']) ? $_SESSION['login_role'] : "Login";
+
+$servername = "localhost";  
+$username = "root";         
+$password = "";             
+$dbname = "auto_mobile";    
+
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+
+$user_id = "";
+$user_password = "";
+$error_message = "";
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
+    if (isset($_POST['user_id']) && isset($_POST['password'])) {
+        
+        $user_id = $_POST['user_id'];
+        $user_password = $_POST['password'];
+
+       
+        $stmt = $conn->prepare("SELECT * FROM User_ WHERE User_ID = ? AND Password = ?");
+        $stmt->bind_param("ss", $user_id, $user_password);
+
+       
+        $stmt->execute();
+
+        
+        $result = $stmt->get_result();
+
+        
+        if ($result->num_rows > 0) {
+           
+            $_SESSION['user_id'] = $user_id; 
+            header("Location: david auto works.html"); 
+            exit;
+        } else {
+           
+            $error_message = "Invalid User ID or Password.";
+        }
+
+        
+        $stmt->close();
+    } else {
+        
+        $error_message = "Please enter both User ID and Password.";
+    }
+}
+
+$conn->close();
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?php echo $role; ?></title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+        .login-container {
+            background-color: rgba(171, 170, 170, 0.274);
+            padding: 20px;
+            border-radius: 30px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 500px;
+        }
+        .center {
+            text-align: center;
+        }
+        .logo {
+            margin-bottom: 20px;
+        }
+        .logo img {
+            width: 200px;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #a00;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+        .login-btn:hover {
+            background-color: #900;
+        }
+        .links {
+            margin-top: 10px;
+        }
+        .links a {
+            color: #a00;
+            text-decoration: none;
+        }
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="center">
+            <div class="logo">
+                <img src="images/logo.png" alt="logo">
+            </div>
+            <h2><?php echo $role; ?></h2>
+        </div>
+
+        <!-- Display error message if login fails -->
+        <?php if (!empty($error_message)): ?>
+            <div class="error-message"><?php echo $error_message; ?></div>
+        <?php endif; ?>
+
+        <form action="" method="post">
+            <label for="user_id">User ID:</label>
+            <input type="text" id="user_id" name="user_id" value="<?php echo isset($user_id) ? htmlspecialchars($user_id) : ''; ?>" required><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br>
+            <br>
+            <div>
+                <input type="checkbox" id="remember">
+                <label for="remember">Remember me</label>
+                <a href="#" style="float: right;">Forgot password</a>
+            </div>
+            <br>
+            <button class="login-btn" type="submit">Login</button>
+        </form>
+
+        
+</body>
+</html>

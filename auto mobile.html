@@ -1,0 +1,104 @@
+<?php
+
+session_start();
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['role'])) {
+    $role = $_POST['role'];
+
+    
+    if ($role == "Admin") {
+        $_SESSION['login_role'] = "Admin Login";
+    } elseif ($role == "Mechanic") {
+        $_SESSION['login_role'] = "Mechanic Login";
+    } elseif ($role == "Manager") {
+        $_SESSION['login_role'] = "Manager Login";
+    }
+  
+   header("Location:login.php");
+    exit();
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David Auto Works</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .login-container {
+            background-color: rgba(171, 170, 170, 0.274);
+            padding: 40px 30px;
+            border-radius: 30px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 500px;
+            height: auto;
+            text-align: center;
+        }
+        .center {
+            text-align: center;
+        }
+        .logo {
+            margin-bottom: 20px;
+        }
+        .logo img {
+            width: 120px;
+        }
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+        }
+        button {
+            padding: 15px 40px;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            cursor: pointer;
+            background-color: #a00;
+            color: white;
+            margin: 10px 0;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        button:hover {
+            background-color: aliceblue;
+            color: black;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="login-container">
+        <div class="center">
+            <div class="logo">
+                <img src="images/logo.png">
+            </div>
+            
+            <h1>David Auto Works</h1>
+        </div>
+
+        <div class="buttons">
+            <form action="login.php" method="post">
+                <button name="role" value="Mechanic">Mechanic</button>
+                <button name="role" value="Admin">Admin</button>
+                <button name="role" value="Manager">Manager</button>
+            </form>
+        </div>
+    </div>
+   
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Reminder Customization</title>
+    <link rel="stylesheet" href="reminders.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h3>
+            <img src="Images/Screenshot 2024-08-24 091058.png" height="50px" alt="Logo"> 
+            David Auto Works
+        </h3>
+        
+        <ul>
+            <li><img src="Images/User.png" height="20px" width="20px"><i class="fa fa-user"></i> Home</li>
+            <li><a href="vehicle.html"><img src="Images/Hennessey Venom.png" height="20px" width="20px"><i class="fa fa-car"></i> Vehicle & Customers</a></li>
+            <li><img src="Images/Service.png" height="20px" width="20px"><i class="fa fa-history"></i> Service History</li>
+            <li><a href="stock details.html"><img src="Images/Sell Stock.png" height="20px" width="20px"><i class="fa fa-box"></i> Stock Details</a></li>
+            <li><img src="Images/Archive List Of Parts.png" height="20px" width="20px"><i class="fa fa-cogs"></i> Parts Usage</li>
+            <li><a href="vendor.html"><img src="Images/Kiosk on Wheels.png" height="20px" width="20px"><i class="fa fa-users"></i> Vendor Management</a></li>
+            <li><a href="pace orders.html"><img src="Images/Place Marker.png" height="20px" width="20px"><i class="fa fa-shopping-cart"></i> Place Orders</a></li>
+            <li><img src="Images/Invoice.png" height="20px" width="20px"><i class="fa fa-file-invoice"></i> Invoice Generation</li>
+            <li><img src="Images/Blockchain.png" height="20px" width="20px"><i class="fa fa-credit-card"></i> Manage Payments</li>
+            <li><a href="reminders.html"><img src="Images/Doorbell.png" height="20px" width="20px"><i class="fa fa-bell"></i> Service Reminders</a></li>
+            <li><img src="Images/Health Graph.png" height="20px" width="20px"><i class="fa fa-chart-line"></i> Daily Sales Reports</li>
+            <li><img src="Images/Logout.png" height="20px" width="20px"><i class="fa fa-sign-out-alt"></i> Log out</li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="search-bar-container">
+            <div class="app-icon">
+                <img src="Images/App.png" height="50px" width="60px" alt="App Icon">
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search Here">
+                <div class="view-toggle">
+                    <!-- Icons for grid view or other options can go here -->
+                </div>
+            </div>
+        </div>
+
+            <section class="form-section">
+                <h2><span class="icon">🔔</span> Service Reminder Customization</h2>
+                <form action="#" method="POST">
+                    <div class="form-group">
+                        <label for="template-title">Template Title</label>
+                        <input type="text" id="template-title" name="template-title">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-content">Message Content</label>
+                        <textarea id="message-content" name="message-content"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="reminder-interval">Reminder Interval</label>
+                        <select id="reminder-interval" name="reminder-interval">
+                            <option value="1-week">1 week before</option>
+                            <option value="2-weeks">2 weeks before</option>
+                            <option value="1-month">1 month before</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="submit-btn">Save Template</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
